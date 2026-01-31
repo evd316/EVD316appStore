@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fdroid>
+	<repo icon="icon.png" name="My First F-Droid Repo Demo" pubkey="3082056130820349a003020102020819e42e01a7896edd300d06092a864886f70d01010b0500305e3110300e060355040b1307462d44726f6964314a30480603550403134172756e6e6572766d6b6a366f722e7a63676a74697678783062657a646f3178746b356333737375672e67782e696e7465726e616c2e636c6f75646170702e6e65743020170d3236303133313132313531355a180f32303533303631383132313531355a305e3110300e060355040b1307462d44726f6964314a30480603550403134172756e6e6572766d6b6a366f722e7a63676a74697678783062657a646f3178746b356333737375672e67782e696e7465726e616c2e636c6f75646170702e6e657430820222300d06092a864886f70d01010105000382020f003082020a0282020100c81a5cdfeaa6c54cd26177379519fe9a1f51426dc48c2b4ea2e258df51e949e8d396102d17eedb4663d7d9a79c2075e36b118cdcdba4dfdaf80fc2d81347b8b9cc97adf90d72f5ba6d63c80333ec29abdede974a4f460a2316dbb6c79a1fed68113eaef2f3456c3b7fce4a0b6f7648f69a0f22edebc1086b6732e08b2dd408e77197faf598f2f9f7dd14f68e8235d09d87cc0e9ea6604c4aa7a62c69da592d5cf84a9e43423390a99d4008d5ffd17bb3fffb05ecb469272ea52348f5da2d04b505e2d3e676edba6d0fe95fe1a540e78bf7d72129a306c217e3539443cb1631b3d0d5abf993591c7d501be0f4bb7ef28276d9f509ee6a6db7d63dcfad70a8a512ec10f03a86b0f2c30b25e0caec0394bb76da96a5a98a2abca66b47ebf78617c746388b2597805aadfc7de4aa192bf0eb04f3fc04c99d003506d9c8976e16f48b8daf4f93cca7daf2e4de61046dc5453e118f8c1b3af2d8661ea8d6eb9f45cc6cd49f73ec4278445612e21bc6eacea2553bc23439036cf3dfc720c1fc00a9258d11378d6caf9954cc7894d1a8aa689e4aedb7fa6a2393a5cd32201731800cd3d62974e122bfbc1b42f2ec5eea1b58bb4f2fde6d1940207f0923c124bef22539ff6b0d8ee77fe9ef7dd4fad345a08fa1301b59f7be22c66e32f8adac28399c76b9bbec6f5df0c51b959dc6fe930eaa759c657357db370b8827cc5fad80db23521f0203010001a321301f301d0603551d0e041604143acbc4190a5f656d1e8078769864587541d9a121300d06092a864886f70d01010b0500038202010094819ceae480dbfca37e18ea1f668cc7d9b89826c964aaea230b1a4ef5bfd87988d2f37413af921aa0c5e6ff0ffe4f12b57f3f675523e4beb75939835d80111903833695c750a70f2c1afdc09c51c09246bbc39b4ebf31252b1aee7065fb112c3cedaae4da0167ae4368450e5a6181c41fc6b84d3c2f9be90c5a2d3fd4ac906c90e3668f82d98c59a0c8da954d4a2c7f441a087368cff201019039fedbadaad7042dbdf682c3a84fa31fa26555bac994d3a820d9bb7f1f83e55bd7b29cb044bf21e3d2bf7eb9a36abfb905cc8f27f980be4fdfa834c1bc0fa1efbfa40702359a40bf8462f13610c76f6545d2d113f1eeb7c5ed28edee935f2dee6a624a8f69a2914558bca12106f6fc0014a0240b03bca1bb785ff6f63ea571332bb3fee25e0e06c4869b9bdfb5a011d737c30f0e7160c2bb4e6a4e1aa1b0558d066494d8eac1ac282ee4b84a3c2f6e38532078d636e03601cd3184d6a7ab8199158de03126d678cf1a962f9128aa958f446d84b37d58c5c14b86942c7aede1a0f050de9a5f8b0f51a4dab6ec681d515d5784d8c89d6b64f883672cf1bc4f13fe6e6a354b60fa0a2115c108ca79249942014347a4a205dc5e0a2c0bb9dbfeb1239d8c3dc5ea812dbed9613c62161298a78be03836a576c6defa714998c1ce6742dde9c221f8bc83f4db297254acc375368f96ecdc79e7faff26d155673ed01498c5c1f328599f" timestamp="1769861718" url="https://MyFirstFDroidRepo.org/fdroid/repo" version="20002">
+		<description>This is a repository of apps to be used with F-Droid. Applications in this repository are either official binaries built by the original application developers, or are binaries built from source by the admin of f-droid.org using the tools on https://gitlab.com/fdroid.</description>
+	</repo>
+	<application id="org.fdroid.fdroid">
+		<id>org.fdroid.fdroid</id>
+		<added>2026-01-31</added>
+		<lastupdated>2026-01-31</lastupdated>
+		<name>F-Droid</name>
+		<summary></summary>
+		<desc>No description available</desc>
+		<license>Unknown</license>
+		<categories>EVD316appStore</categories>
+		<category>EVD316appStore</category>
+		<web></web>
+		<source></source>
+		<tracker></tracker>
+		<marketversion></marketversion>
+		<marketvercode>2147483647</marketvercode>
+		<package>
+			<version>1.23.1</version>
+			<versioncode>1023051</versioncode>
+			<apkname>F-Droid-1.23.1.apk</apkname>
+			<hash type="sha256">1dfce4269081693f10350dbabd26991a59d7c2bb81f870de54e5b113f4785b7a</hash>
+			<size>12426276</size>
+			<sdkver>23</sdkver>
+			<targetSdkVersion>30</targetSdkVersion>
+			<added>2026-01-31</added>
+			<sig>9063aaadfff9cfd811a9c72fb5012f28</sig>
+			<permissions>ACCESS_NETWORK_STATE,ACCESS_WIFI_STATE,BLUETOOTH,BLUETOOTH_ADMIN,BLUETOOTH_CONNECT,BLUETOOTH_SCAN,CAMERA,CHANGE_NETWORK_STATE,CHANGE_WIFI_MULTICAST_STATE,CHANGE_WIFI_STATE,ENFORCE_UPDATE_OWNERSHIP,FOREGROUND_SERVICE,INTERNET,MANAGE_EXTERNAL_STORAGE,NFC,POST_NOTIFICATIONS,QUERY_ALL_PACKAGES,READ_EXTERNAL_STORAGE,RECEIVE_BOOT_COMPLETED,REQUEST_DELETE_PACKAGES,REQUEST_INSTALL_PACKAGES,UPDATE_PACKAGES_WITHOUT_USER_ACTION,USB_PERMISSION,WAKE_LOCK,WRITE_EXTERNAL_STORAGE,WRITE_SETTINGS,org.fdroid.fdroid.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION,org.fdroid.fdroid.permission.UPDATE_REPOS</permissions>
+			<uses-permission maxSdkVersion="32" name="android.permission.BLUETOOTH"/>
+			<uses-permission maxSdkVersion="30" name="android.permission.BLUETOOTH_ADMIN"/>
+			<uses-permission maxSdkVersion="22" name="android.permission.USB_PERMISSION"/>
+			<uses-permission maxSdkVersion="28" name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+			<nativecode>arm64-v8a,armeabi-v7a,x86,x86_64</nativecode>
+		</package>
+	</application>
+</fdroid>
