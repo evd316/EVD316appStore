@@ -27,13 +27,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y fdroidserver
 
-      - name: Initialize and Update Repo
+      - name: Build F-Droid Index
         run: |
+          # 1. Создаем папку метаданных, если её нет
           mkdir -p metadata
-          # Убрали проблемный флаг --dist
-          fdroid init
-          # Генерируем индекс из ваших APK
-          fdroid update --create-metadata --pretty || echo "Done with warnings"
+          
+          # 2. Инициализируем конфиг (если его нет)
+          if [ ! -f config.yml ]; then
+            fdroid init
+          fi
+          
+          # 3. Генерируем индекс магазина
+          # Мы используем --pretty для читаемости и создаем метаданные из APK
+          fdroid update --create-metadata --pretty
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -41,6 +47,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # ВАЖНО: загружаем корень '.', чтобы папка /repo/ осталась папкой
           path: '.'
 
       - name: Deploy to GitHub Pages
