@@ -16,14 +16,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup F-Droid Server
+      - name: Setup Java (Критически важно для подписи индекса)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install F-Droid Server
         run: |
           sudo apt-get update
           sudo apt-get install -y fdroidserver
-          # Инициализация без лишних вопросов
+
+      - name: Initialize and Update Repo
+        run: |
+          # Создаем пустую папку метаданных, чтобы fdroid не падал
+          mkdir -p metadata
+          # Инициализируем конфиг (ключи подписи создадутся автоматически)
           fdroid init --dist
-          # Генерируем индекс, игнорируя отсутствие Java-ключей (для личного пользования это ок)
-          fdroid update --create-metadata --pretty || echo "Done with warnings"
+          # Генерируем индекс магазина. 
+          # Флаг --pretty делает файл читаемым, --create-metadata собирает инфо из APK.
+          fdroid update --create-metadata --pretty
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
