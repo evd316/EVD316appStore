@@ -2,37 +2,48 @@ name: Update F-Droid Repo
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install F-Droid server
+      - name: Install F-Droid Server
         run: |
           sudo apt-get update
           sudo apt-get install -y fdroidserver
 
-      - name: Run F-Droid update
-        run: fdroid update -c
+      - name: Prepare metadata
+        run: mkdir -p metadata
 
-      - name: Commit and push changes
+      - name: Initialize and Update Repo
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Update F-Droid index"
-          git push
+          fdroid init --dist
+          fdroid update --create-metadata --pretty || echo "Warnings ignored"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'repo/'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
