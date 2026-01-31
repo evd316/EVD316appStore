@@ -32,21 +32,15 @@ jobs:
       - name: Generate F-Droid Index
         run: |
           mkdir -p metadata
-          [ -f config.yml ] || fdroid init
-          # Игнорируем ошибки конкретных APK, чтобы создать индекс для остальных
-          fdroid update --create-metadata --pretty || echo "Warning: Some APKs skipped due to errors"
-          
-          # Проверка: создался ли файл? Результат будет виден в логах
-          echo "Checking for index files:"
-          ls -l repo/index.xml || echo "STILL NO INDEX.XML"
+          # Мы больше не делаем fdroid init, чтобы не затирать твой config.yml
+          fdroid update --create-metadata --pretty || echo "Skipping broken APKs..."
 
       - name: Commit index back to repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # Принудительно добавляем файлы, если они есть
-          git add repo/*.xml repo/*.jar .nojekyll || true
-          git commit -m "Update F-Droid index" || echo "No changes to commit"
+          git add repo/index.xml repo/index-v1.jar repo/*.jar .nojekyll || true
+          git commit -m "Update F-Droid index with custom config" || echo "No changes to commit"
           git push
 
       - name: Upload Pages Artifact
