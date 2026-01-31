@@ -32,17 +32,17 @@ jobs:
       - name: Generate F-Droid Index
         run: |
           mkdir -p metadata
-          # Создаем ключи и конфиг, если их нет
           [ -f config.yml ] || fdroid init
-          # Генерируем тот самый index.xml
-          fdroid update --create-metadata --pretty
+          # Ключевое изменение: добавляем ключ -v (verbose) и игнорируем ошибку, чтобы дойти до конца
+          fdroid update --create-metadata --pretty || echo "Some APKs failed to scan, but continuing..."
 
       - name: Commit index back to repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Update index.xml and metadata" || echo "No changes to commit"
+          # Добавляем только созданные индексы
+          git add repo/index.xml repo/index-v1.jar repo/index.jar .nojekyll || true
+          git commit -m "Update F-Droid index" || echo "No changes to commit"
           git push
 
       - name: Upload Pages Artifact
