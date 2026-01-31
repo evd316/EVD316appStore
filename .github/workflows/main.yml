@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -27,29 +29,26 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y fdroidserver
 
-      - name: Build F-Droid Index
+      - name: Generate F-Droid Index
         run: |
-          # 1. Создаем папку метаданных, если её нет
           mkdir -p metadata
-          
-          # 2. Инициализируем конфиг (если его нет)
-          if [ ! -f config.yml ]; then
-            fdroid init
-          fi
-          
-          # 3. Генерируем индекс магазина
-          # Мы используем --pretty для читаемости и создаем метаданные из APK
+          # Создаем ключи и конфиг, если их нет
+          [ -f config.yml ] || fdroid init
+          # Генерируем тот самый index.xml
           fdroid update --create-metadata --pretty
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Commit index back to repo
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update index.xml and metadata" || echo "No changes to commit"
+          git push
 
-      - name: Upload Artifact
+      - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # ВАЖНО: загружаем корень '.', чтобы папка /repo/ осталась папкой
           path: '.'
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
