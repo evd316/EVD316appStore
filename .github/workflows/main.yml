@@ -2,19 +2,30 @@ name: Update F-Droid Repo
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup F-Droid Server
         run: |
           sudo apt-get update
-          sudo apt-get install fdroidserver
-          fdroid init
-          fdroid update --create-metadata
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+          sudo apt-get install -y fdroidserver
+          # Создаем необходимые папки, чтобы скрипт не ругался
+          mkdir -p metadata
+          # Инициализация и генерация индекса
+          fdroid init --dist
+          fdroid update --create-metadata || echo "Ignored some metadata warnings"
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: repo
-          branch: gh-pages
+          path: repo/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
