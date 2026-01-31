@@ -1,0 +1,20 @@
+name: Update F-Droid Repo
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup F-Droid Server
+        run: |
+          sudo apt-get update
+          sudo apt-get install fdroidserver
+          fdroid init
+          fdroid update --create-metadata
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: repo
+          branch: gh-pages
