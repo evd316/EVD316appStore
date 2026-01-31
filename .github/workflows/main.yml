@@ -33,15 +33,19 @@ jobs:
         run: |
           mkdir -p metadata
           [ -f config.yml ] || fdroid init
-          # Ключевое изменение: добавляем ключ -v (verbose) и игнорируем ошибку, чтобы дойти до конца
-          fdroid update --create-metadata --pretty || echo "Some APKs failed to scan, but continuing..."
+          # Игнорируем ошибки конкретных APK, чтобы создать индекс для остальных
+          fdroid update --create-metadata --pretty || echo "Warning: Some APKs skipped due to errors"
+          
+          # Проверка: создался ли файл? Результат будет виден в логах
+          echo "Checking for index files:"
+          ls -l repo/index.xml || echo "STILL NO INDEX.XML"
 
       - name: Commit index back to repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # Добавляем только созданные индексы
-          git add repo/index.xml repo/index-v1.jar repo/index.jar .nojekyll || true
+          # Принудительно добавляем файлы, если они есть
+          git add repo/*.xml repo/*.jar .nojekyll || true
           git commit -m "Update F-Droid index" || echo "No changes to commit"
           git push
 
