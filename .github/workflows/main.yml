@@ -1,5 +1,4 @@
 name: Update F-Droid Repo
-
 on:
   push:
     branches: [ main ]
@@ -28,13 +27,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y fdroidserver
 
-      - name: Prepare metadata
-        run: mkdir -p metadata
-
       - name: Initialize and Update Repo
         run: |
-          fdroid init --dist
-          fdroid update --create-metadata --pretty || echo "Warnings ignored"
+          mkdir -p metadata
+          # Убрали проблемный флаг --dist
+          fdroid init
+          # Генерируем индекс из ваших APK
+          fdroid update --create-metadata --pretty || echo "Done with warnings"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
